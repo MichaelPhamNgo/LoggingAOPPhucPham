@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <property name="log-dir" value="log" />
+    <property name="log-name" value="logFile" />
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{YYYY-MM-dd HH:mm} %yellow([%thread]) %highlight(%-5level) %logger{30}:%L- %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="NOCOLORCONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%-5level %logger{10}:%L- %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log-dir}/${log-name}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+
+            <fileNamePattern>${log-dir}/${log-name}.%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <!--you could have a history for 7 files.-->
+            <MaxHistory>
+                7
+            </MaxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>1MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{YYYY-MM-dd HH:mm} %yellow([%thread]) %highlight(%-5level) %logger{30}:%L- %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--    <logger name="com.bfs.controller" level="TRACE" >-->
+    <!--        <appender-ref ref="CONSOLE" />-->
+    <!--    </logger>-->
+
+<!--    <logger name="com.bfs.dao" level="WARN" >-->
+<!--        <appender-ref ref="CONSOLE" />-->
+<!--    </logger>-->
+
+<!--    &lt;!&ndash;    additivity="false"&ndash;&gt;-->
+<!--    <logger name="com.bfs.service" level="ERROR" >-->
+<!--        <appender-ref ref="CONSOLE" />-->
+<!--    </logger>-->
+
+
+    <root level="INFO">
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>
